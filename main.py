@@ -27,5 +27,12 @@ def processar_anamnese():
     except Exception as e:
         return jsonify({"erro": str(e)}), 500
 
+# ✅ Rota para listar todas as rotas disponíveis no servidor
+@app.route('/listar_rotas', methods=['GET'])
+def listar_rotas():
+    rotas = [rule.rule for rule in app.url_map.iter_rules()]
+    return jsonify({"rotas_disponiveis": rotas})
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)), debug=True)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port, debug=True)
