@@ -4,6 +4,12 @@ from robo_anamnese import AnamneseProcessor  # Importa o robô criado anteriorme
 
 app = Flask(__name__)
 
+# Rota para testar se o servidor está online
+@app.route('/')
+def home():
+    return "Servidor rodando com sucesso!"
+
+# Rota para processar a anamnese
 @app.route('/processar_anamnese', methods=['POST'])
 def processar_anamnese():
     try:
@@ -22,5 +28,4 @@ def processar_anamnese():
         return jsonify({"erro": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)), debug=True)
-
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)), debug=True)
